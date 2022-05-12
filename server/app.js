@@ -4,13 +4,18 @@ const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 
 const app = express();
+var cors = require('cors');
+app.use(cors());
 
 mongoose.connect('mongodb://localhost:27017');
 mongoose.connection.once('open', () => {
   console.log('connected to database');
 })
 
+
+
 app.use('/graphql', graphqlHTTP({
+
   schema,
   graphiql: true
 }));
